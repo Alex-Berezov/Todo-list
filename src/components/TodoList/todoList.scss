@@ -1,0 +1,52 @@
+.todoList {
+  margin-top: 50px;
+
+  &__item {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    width: 20em;
+    min-width: 20em;
+    border: 1px solid #79b38a;
+    border-radius: 5px;
+
+    &-text-input {
+      width: 90%;
+    }
+
+    &-sent-button {
+      margin-left: 5px;
+      color: #fff;
+      background-color: #79b38a;
+      border: 1px solid #79b38a;
+      border-radius: 5px;
+      padding: 2px 5px;
+      cursor: pointer;
+    }
+
+    &-error-message {
+      color: red;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    span {
+      color: red;
+      cursor: pointer;
+    }
+
+    .checkbox {
+      margin-left: auto;
+      margin-right: 10px;
+    }
+
+    .completed {
+      color: grey;
+      text-decoration: line-through;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+export type error = null | string
+
+export interface ITodo {
+  id: string
+  title: string
+  completed: boolean
+}

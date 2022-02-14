@@ -1,0 +1,19 @@
+.navbar {
+  background-color: #79b38a;
+
+  &-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    img {
+      width: 3em;
+      height: 3em;
+    }
+
+    .nav {
+      font-size: 16px;
+      color: #fff;
+    }
+  }
+}
