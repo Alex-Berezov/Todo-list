@@ -1,4 +1,5 @@
-# To run the project locally, use the script ###npm run dev
+### `npm run dev`
+## To run the project locally, use the script
 
 ## Available Scripts
 
