@@ -1,6 +1,10 @@
 import { FC, useEffect, useState } from 'react';
+import AddTodoBatton from '../../components/AddTodoBatton/AddTodoBatton';
+import TodoFilter from '../../components/TodoFilter/TodoFilter';
 
 import TodoList from '../../components/TodoList/TodoList';
+import TodoSearch from '../../components/TodoSearch/TodoSearch';
+import useSelect from '../../hooks/useSelect';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from './../../hooks/useActions';
 
@@ -13,6 +17,11 @@ const Todo: FC = () => {
   const { completeTodo } = useActions()
   const { deleteTodo } = useActions()
   const [isAddingTodo, setIsAddingTodo] = useState<boolean>(false)
+  const selectTodo = useSelect('')
+
+  console.log('====================================');
+  console.log(selectTodo.value);
+  console.log('====================================');
 
   useEffect(() => {
     fetchTodos()
@@ -20,9 +29,15 @@ const Todo: FC = () => {
 
   return (
     <div className='container todo'>
-      <button className='addTodoButton' onClick={() => setIsAddingTodo(true)}>
-        Добавить задачу
-      </button>
+      <div className='todo__header'>
+        <div className='todo__header-buttons'>
+          <AddTodoBatton setIsAddingTodo={setIsAddingTodo} />
+          <TodoFilter {...selectTodo} />
+        </div>
+        <div className="todo__header-search">
+          <TodoSearch />
+        </div>
+      </div>
       <TodoList
         todos={todos}
         loading={loading}

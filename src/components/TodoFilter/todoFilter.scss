@@ -1,0 +1,17 @@
+.todo-filter {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+
+  p {
+    margin: 0 10px 0 0
+  }
+
+  select {
+    outline: none;
+    cursor: pointer;
+    border: 2px solid #79b38a;
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+}
