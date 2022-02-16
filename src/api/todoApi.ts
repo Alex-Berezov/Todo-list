@@ -8,8 +8,8 @@ export const todoAPI = {
   postTodo(newTodo: ITodo) {
     return instance.post<ITodo>('http://localhost:3002/todos', newTodo)
   },
-  updateTodo(todoId: string) {
-    return instance.patch<ITodo>(`http://localhost:3002/todos/${todoId}`)
+  updateTodo(todoId: string, completed: boolean) {
+    return instance.patch<ITodo>(`http://localhost:3002/todos/${todoId}`, { 'completed': !completed })
   },
   deleteTodo(todoId: string) {
     return instance.delete<ITodo>(`http://localhost:3002/todos/${todoId}`)

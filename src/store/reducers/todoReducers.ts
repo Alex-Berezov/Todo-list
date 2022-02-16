@@ -12,7 +12,7 @@ export const todosReducer = (state = initialState, action: TodoAction): TodoStat
       return { loading: true, error: null, todos: [] }
 
     case TodoActionType.ADD_TODO:
-      return { loading: false, error: null, todos: [{ ...action.payload }, ...state.todos] }
+      return { loading: false, error: null, todos: [...state.todos, { ...action.payload }] }
 
     case TodoActionType.COMPLETE_TODO:
       return {

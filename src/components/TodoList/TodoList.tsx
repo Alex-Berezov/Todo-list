@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import { error, ITodo } from './../../types/types'
 import TodoListItem from './../TodoListItem/TodoListItem';
@@ -16,7 +16,7 @@ interface TodoListProps {
   isAddingTodo: boolean
   setIsAddingTodo: (bool: boolean) => void
   addTodo: (obj: ITodo) => void
-  completeTodo: (id: string) => void
+  completeTodo: (id: string, completed: boolean) => void
   deleteTodo: (todoId: string) => void
 }
 
@@ -25,8 +25,8 @@ const TodoList: FC<TodoListProps> = ({
 }) => {
   const addTodoInput = useInput('', { isEmpty: true, maxLength: 19, uniqueTask: todos })
 
-  const toggleComplitedTodo = (id: string) => {
-    completeTodo(id)
+  const toggleComplitedTodo = (id: string, completed: boolean) => {
+    completeTodo(id, completed)
   }
 
   const handleDeleteTodo = (todoId: string) => {
@@ -69,7 +69,7 @@ const TodoList: FC<TodoListProps> = ({
               handleDeleteTodo={handleDeleteTodo}
               toggleComplitedTodo={toggleComplitedTodo}
             />
-          )
+          ).reverse()
       }
     </div>
   );

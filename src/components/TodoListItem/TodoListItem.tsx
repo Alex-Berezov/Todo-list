@@ -3,7 +3,7 @@ import { ITodo } from './../../types/types';
 
 interface TodoListItemProps {
   todo: ITodo
-  toggleComplitedTodo: (todoId: string) => void
+  toggleComplitedTodo: (todoId: string, completed: boolean) => void
   handleDeleteTodo: (todoId: string) => void
 }
 
@@ -15,7 +15,7 @@ const TodoListItem: FC<TodoListItemProps> = ({ todo, handleDeleteTodo, toggleCom
         className='checkbox'
         type="checkbox"
         checked={todo.completed}
-        onChange={() => toggleComplitedTodo(todo.id)}
+        onChange={() => toggleComplitedTodo(todo.id, todo.completed)}
       />
       <span onClick={() => handleDeleteTodo(todo.id)}>X</span>
     </form>

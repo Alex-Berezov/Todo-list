@@ -6,6 +6,7 @@ import TodoList from '../../components/TodoList/TodoList';
 import TodoSearch from '../../components/TodoSearch/TodoSearch';
 import useSelect from '../../hooks/useSelect';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { ITodo } from '../../types/types';
 import { useActions } from './../../hooks/useActions';
 
 import './todo.scss'
@@ -18,14 +19,39 @@ const Todo: FC = () => {
   const { deleteTodo } = useActions()
   const [isAddingTodo, setIsAddingTodo] = useState<boolean>(false)
   const selectTodo = useSelect('')
-
-  console.log('====================================');
-  console.log(selectTodo.value);
-  console.log('====================================');
+  const [filteredTodos, setFilteredTodos] = useState<Array<ITodo>>(todos)
 
   useEffect(() => {
     fetchTodos()
   }, [])
+
+  useEffect(() => {
+    setFilteredTodos(todos)
+  }, [todos])
+
+  const todoFilter = (status: string) => {
+    switch (status) {
+      case 'done':
+        setFilteredTodos(todos.filter(todo => todo.completed === true))
+        break;
+
+      case 'inProgress':
+        setFilteredTodos(todos.filter(todo => todo.completed === false))
+        break;
+
+      case 'all':
+        setFilteredTodos(todos)
+        break;
+
+      default:
+        setFilteredTodos(todos)
+        break;
+    }
+  }
+
+  useEffect(() => {
+    todoFilter(selectTodo.value)
+  }, [selectTodo.value])
 
   return (
     <div className='container todo'>
@@ -33,13 +59,11 @@ const Todo: FC = () => {
         <div className='todo__header-buttons'>
           <AddTodoBatton setIsAddingTodo={setIsAddingTodo} />
           <TodoFilter {...selectTodo} />
-        </div>
-        <div className="todo__header-search">
           <TodoSearch />
         </div>
       </div>
       <TodoList
-        todos={todos}
+        todos={filteredTodos}
         loading={loading}
         error={error}
         isAddingTodo={isAddingTodo}

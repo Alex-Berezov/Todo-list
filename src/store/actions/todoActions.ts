@@ -8,9 +8,6 @@ export const fetchTodos = () => {
     try {
       dispatch({ type: TodoActionType.FETCH_TODOS })
       const data = await todoAPI.getTodos()
-      console.log('====================================');
-      console.log(data);
-      console.log('====================================');
       dispatch({ type: TodoActionType.TODOS_SUCCESS, payload: data })
     } catch (error) {
       dispatch({
@@ -35,11 +32,11 @@ export const addTodo = (newTodo: ITodo) => {
   }
 }
 
-export const completeTodo = (todoId: string) => {
+export const completeTodo = (todoId: string, completed: boolean) => {
   return async (dispatch: Dispatch<TodoAction>) => {
     try {
       dispatch({ type: TodoActionType.COMPLETE_TODO, payload: todoId })
-      await todoAPI.updateTodo(todoId)
+      await todoAPI.updateTodo(todoId, completed)
     } catch (error) {
       dispatch({
         type: TodoActionType.TODOS_ERROR,
