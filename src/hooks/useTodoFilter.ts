@@ -1,32 +1,32 @@
 import { useState, useEffect } from 'react';
 import { ITodo } from '../types/types';
 
-export default function useTodoFilter(todos: any[], status: string) {
-  const [filteredTodos, setFilteredTodos] = useState<Array<ITodo>>(todos)
+export default function useTodoFilter(todos: Array<ITodo>, status: string) {
+  const [sortedTodos, setSortedTodos] = useState<Array<ITodo>>(todos)
 
   useEffect(() => {
-    setFilteredTodos(todos)
+    setSortedTodos(todos)
   }, [todos])
 
-  const todoFilter = (status: string) => {
+  const todoSort = (status: string) => {
     switch (status) {
       case 'done':
-        setFilteredTodos(todos.filter(todo => todo.completed === true))
+        setSortedTodos(todos.filter(todo => todo.completed === true))
         break;
 
       case 'inProgress':
-        setFilteredTodos(todos.filter(todo => todo.completed === false))
+        setSortedTodos(todos.filter(todo => todo.completed === false))
         break;
 
       case 'all':
-        setFilteredTodos(todos)
+        setSortedTodos(todos)
         break;
 
       default:
-        setFilteredTodos(todos)
+        setSortedTodos(todos)
         break;
     }
   }
 
-  return { todoFilter, filteredTodos }
+  return { todoSort, sortedTodos }
 }
