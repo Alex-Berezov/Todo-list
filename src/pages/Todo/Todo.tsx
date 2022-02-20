@@ -1,13 +1,12 @@
 import { FC, useEffect, useState } from 'react';
 import AddTodoBatton from '../../components/AddTodoBatton/AddTodoBatton';
 import TodoFilter from '../../components/TodoFilter/TodoFilter';
-
 import TodoList from '../../components/TodoList/TodoList';
 import TodoSearch from '../../components/TodoSearch/TodoSearch';
 import useSelect from '../../hooks/useSelect';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { ITodo } from '../../types/types';
 import { useActions } from './../../hooks/useActions';
+import useTodoFilter from './../../hooks/useTodoFilter';
 
 import './todo.scss'
 
@@ -19,35 +18,12 @@ const Todo: FC = () => {
   const { deleteTodo } = useActions()
   const [isAddingTodo, setIsAddingTodo] = useState<boolean>(false)
   const selectTodo = useSelect('')
-  const [filteredTodos, setFilteredTodos] = useState<Array<ITodo>>(todos)
+  const { todoFilter, filteredTodos } = useTodoFilter(todos, selectTodo.value)
+
 
   useEffect(() => {
     fetchTodos()
   }, [])
-
-  useEffect(() => {
-    setFilteredTodos(todos)
-  }, [todos])
-
-  const todoFilter = (status: string) => {
-    switch (status) {
-      case 'done':
-        setFilteredTodos(todos.filter(todo => todo.completed === true))
-        break;
-
-      case 'inProgress':
-        setFilteredTodos(todos.filter(todo => todo.completed === false))
-        break;
-
-      case 'all':
-        setFilteredTodos(todos)
-        break;
-
-      default:
-        setFilteredTodos(todos)
-        break;
-    }
-  }
 
   useEffect(() => {
     todoFilter(selectTodo.value)

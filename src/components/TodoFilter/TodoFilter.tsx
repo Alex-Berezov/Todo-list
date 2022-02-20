@@ -9,7 +9,7 @@ interface TodoFilterProps {
 const TodoFilter: FC<TodoFilterProps> = ({ value, chengeSelect }) => {
   return (
     <div className='todo-filter'>
-      <p>Сортировать: </p>
+      <p>Фильтр: </p>
       <select value={value} onChange={chengeSelect}>
         <option value="all">Все</option>
         <option value="done">Завершённые</option>
