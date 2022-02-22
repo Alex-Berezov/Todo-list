@@ -1,5 +1,4 @@
-import React, { FC } from 'react';
-import './addTodoBatton.scss'
+import React, { FC } from 'react'
 
 interface AddTodoBattonProps {
   setIsAddingTodo: (bol: boolean) => void
@@ -7,7 +6,7 @@ interface AddTodoBattonProps {
 
 const AddTodoBatton: FC<AddTodoBattonProps> = ({ setIsAddingTodo }) => {
   return (
-    <button className='addTodoButton' onClick={() => setIsAddingTodo(true)}>
+    <button className='btn-green-outlined' onClick={() => setIsAddingTodo(true)}>
       Добавить задачу
     </button>
   );
